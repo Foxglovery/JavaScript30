@@ -8,6 +8,7 @@
 <body>
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
+  //using the data-set to store the suffix allows us to use it later.
   <div class="controls">
     <label for="spacing">Spacing:</label>
     <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
@@ -64,7 +65,9 @@
     const inputs = document.querySelectorAll('.controls input')
     
     function handleUpdate() {
-      console.log(this.value);
+      const suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+      
     }
 
     inputs.forEach(input => input.addEventListener('change', handleUpdate));
